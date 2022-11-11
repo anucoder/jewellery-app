@@ -37,7 +37,7 @@ const ProductPage = () => {
 
   let filterOperation = async (filter) => {
     console.log(filter);
-    let URL = "http://localhost:5002/products/filter";
+    let URL = "https://fantasy-jewellery-app.herokuapp.com/products/filter";
     try {
       let { data } = await axios.post(URL, filter);
       if (data.status === true) {
