@@ -14,7 +14,7 @@ const Category = () => {
   let getCategories = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:5002/categories"
+        "https://fantasy-jewellery-app.herokuapp.com/categories"
       );
       if (data.status === true) {setCategories([...data.categoryList]);}
       else setCategories([]);

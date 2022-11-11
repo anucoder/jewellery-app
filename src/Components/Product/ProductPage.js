@@ -109,7 +109,7 @@ const ProductPage = () => {
   let getProductList = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:5002/products/" + cat_id
+        "https://fantasy-jewellery-app.herokuapp.com/products/" + cat_id
       );
       if (data.status === true) {
         setProductList([...data.productlist]);

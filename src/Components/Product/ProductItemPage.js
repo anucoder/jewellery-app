@@ -23,7 +23,7 @@ function ProductItemPage() {
   let getProductDetails = async () => {
     try {
       let { data } = await axios.get(
-        "http://localhost:5002/product-details/" + id
+        "https://fantasy-jewellery-app.herokuapp.com/product-details/" + id
       );
       if (data.status === true) {
         setProductDetails({ ...data.productDetails });
