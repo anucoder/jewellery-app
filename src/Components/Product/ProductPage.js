@@ -130,7 +130,7 @@ const ProductPage = () => {
 
   return (
     <>
-      <Header />
+      <Header cartItem={{}}/>
       <Container>
         <div className="inner-container">
           <div className="product-section">

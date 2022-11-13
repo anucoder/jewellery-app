@@ -58,9 +58,16 @@ z-index: -1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 10;
 }
+.right{
+  display: flex;
+  justify-content: space-around;
+}
 
+.logout{
+  
+}
 /* HeaderCartButton */
-.button {
+.button,.logout,.login{
   /* width:15%; */
   cursor: pointer;
   font: inherit;
@@ -71,12 +78,17 @@ z-index: -1;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border-radius: 25px;
+  border-radius: 15px;
   font-weight: bold;
+  margin-left:10px
 }
 
 .button:hover,
 .button:active {
+  background-color: #05120e;
+}
+.logout:hover,
+.logout:active {
   background-color: #05120e;
 }
 
@@ -138,7 +150,7 @@ padding:0 10%;
   width:100%;
   padding:4% 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items:center;
   flex-wrap: wrap;
 }
@@ -334,7 +346,7 @@ footer a{
   width:100%;
   padding:4% 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items:center;
   flex-wrap: wrap;
 }
@@ -440,7 +452,7 @@ background-color: white;
   width:40%;
 }
 
-.card-large button{
+.add-cart-btn{
   background-color: hsl(158, 36%, 37%);
   border-radius: 8px;
   border:none;
@@ -450,7 +462,166 @@ background-color: white;
   color:white;
 }
 
+.add-remove-btn{
+  width:100%; 
+  height: 50px; 
+}
+
+.inc-btn{
+  display: inline-block;
+  background-color: hsl(158, 36%, 37%);
+  border-radius: 8px;
+  border:1px solid white;
+  margin:10px 0 20px 0;
+  height: 100%;
+  width:33%;
+  color:white;
+  font-size: 20px;
+}
+
+
+
+.counter-btn
+{
+  display: inline-block;
+  background-color: white;
+  border-radius: 8px;
+  border:1px solid hsl(158, 36%, 37%);
+  margin:10px 0 20px 0;
+  height: 100%;
+  width:30%;
+  color:hsl(158, 36%, 37%);
+  font-size: 20px;
+  box-shadow:inset -2px 1px grey;
+}
+
+
+
 #cart-icon{
   color:white;
   margin-right: 10px;
 }
+
+.cart{
+  padding:50px 0;
+}
+
+.totalPrice{
+  border-radius: 3px;
+  width: 60%;
+  /* height: vh; */
+  padding:10px;
+  background-color:white;
+  /* padding: 0 10%; */
+  box-shadow: 0px 1px 7px 0px #0436179d;
+  display:flex;
+  justify-content: space-around;
+  margin:20px 0;
+}
+
+.cartItem{
+    border-radius: 3px;
+    width: 100%;
+    height: 18vh;
+    padding:10px;
+    background-color:white;
+    /* padding: 0 10%; */
+    box-shadow: 0px 1px 7px 0px #0436179d;
+    display:flex;
+    justify-content: space-around;
+    margin:20px 0;
+  }
+  .cartItem image {
+   /* margin:10px; */
+    width: 25%;
+    height: 20vh;
+  }
+  .cartItem .image img{
+    width:100%;
+    height:100%;
+  }
+
+  .cartItem .item-desc{
+    text-align: center;
+    color:#0f0e0e;
+    width: 55%;
+    height:100%;
+    font-weight: 500;
+    font-size: 1.75em;
+    font-style: italic;
+    border-left:1px solid grey;
+    /* text-shadow: 0px 1px 20px #dffbeaeb; */
+  }
+
+  .button-group{
+    margin:0 auto;
+    height:30px;
+    width:50%;
+    /* text-align: center; */
+  }
+
+  .cartItem .item-desc p:nth-child(2){
+    font-weight: 400;
+    font-size: 0.75em; 
+    /* text-shadow: 0px 1px 20px #dffbeaeb; */
+  }
+
+  .cartItem .item-price{
+    text-align: center;
+    color:#0f0e0e;
+    width: 20%;
+    height:100%;
+    border-left:1px solid grey;
+    font-weight: 500;
+    font-size: 1.75em;
+    font-style: italic;
+    /* text-shadow: 0px 1px 20px #dffbeaeb; */
+  }
+
+
+  /* order form */
+  .myForm {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 0.8em;
+    width: 200em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    }
+
+    .myForm legend,
+.myForm label {
+padding: 0;
+font-weight: bold;
+}
+
+.myForm input[type="text"],
+.myForm input[type="tel"],
+.myForm input[type="email"],
+.myForm textarea {
+display: block;
+width: 100%;
+border: 1px solid #ccc;
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.9em;
+padding: 0.3em;
+}
+
+.myForm textarea {
+height: 100px;
+}
+
+.myForm button {
+padding: 1em;
+border-radius: 0.5em;
+background: #eee;
+border: none;
+font-weight: bold;
+margin-top: 1em;
+border:1px solid #0436179d;
+}
+
+.myForm button:hover {
+background: #ccc;
+cursor: pointer;
+}
+

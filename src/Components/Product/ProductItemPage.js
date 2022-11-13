@@ -15,10 +15,27 @@ function ProductItemPage() {
       rate: 0,
       count: 0,
     },
-    price:0
+    price: 0,
   });
+  let [cartItem, setCartItem] = useState({ qty: 0 });
+  let [totalPrice, setTotalrice] = useState(0);
 
   let { id } = useParams();
+
+  let addCartItemsTotal = () => {
+    if (cartItem.qty == 0) setCartItem({ ...product, qty: 1 });
+    else {
+      let _cartItem = { ...cartItem };
+      _cartItem.qty += 1;
+      setCartItem({ ..._cartItem });
+    }
+  };
+
+  let removeCartItemsTotal = () => {
+    let _cartItem = { ...cartItem };
+    _cartItem.qty -= 1;
+    setCartItem({ ..._cartItem });
+  };
 
   let getProductDetails = async () => {
     try {
@@ -64,9 +81,9 @@ function ProductItemPage() {
 
   return (
     <>
-      <Header />
+      <Header cartItem={cartItem} />
       <Container>
-        {/* {console.log(product)} */}
+        {/* {console.loag(product)} */}
         <div className="container-large">
           <div className="card-large">
             <img
@@ -78,28 +95,48 @@ function ProductItemPage() {
               <p className="product">{Category}</p>
               <h1 className="product-name">{product.title}</h1>
               <p className="product-description">{product.description}</p>
-              <p>Materials used : {product.material.length > 0
+              <p>
+                Materials used :{" "}
+                {product.material.length > 0
                   ? product.material.reduce((pVal, cVal) => {
                       return pVal + " , " + cVal;
                     })
-                  : null}</p>
-            <p>Stones used : {product.stones.length > 0
+                  : null}
+              </p>
+              <p>
+                Stones used :{" "}
+                {product.stones.length > 0
                   ? product.stones.reduce((pVal, cVal) => {
                       return pVal + " , " + cVal;
                     })
-                  : null}</p>
+                  : null}
+              </p>
               <div className="price">
                 <h1 className="new-price">{product.price}</h1>
                 <p>
-                  {product.rating.count} {product.rating.rate} star ratings
+                  Ratings: {product.rating.rate}{" "}
+                  <i className="fa fa-star" aria-hidden="true"></i>(
+                  {product.rating.count})
                 </p>
               </div>
-              <button className="hand">
-                <span id="cart-icon">
-                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                </span>
-                Add to Cart
-              </button>
+              {cartItem.qty > 0 ? (
+                <div className="hand add-remove-btn">
+                  <button className="hand inc-btn" onClick={() => removeCartItemsTotal()}>
+                    -
+                  </button>
+                  <button className="counter-btn">{cartItem.qty}</button>
+                  <button className="hand inc-btn" onClick={() => addCartItemsTotal()}>
+                    +
+                  </button>
+                </div>
+              ) : (
+                <button className="hand add-cart-btn" onClick={() => addCartItemsTotal()}>
+                  <span id="cart-icon">
+                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
+                  </span>
+                  Add to Cart
+                </button>
+              )}
             </div>
           </div>
         </div>
