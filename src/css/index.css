@@ -63,9 +63,6 @@ z-index: -1;
   justify-content: space-around;
 }
 
-.logout{
-  
-}
 /* HeaderCartButton */
 .button,.logout,.login{
   /* width:15%; */
