@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
+import axios from "axios"
 
 import CartIcon from './CartIcon';
 
@@ -7,21 +8,51 @@ const HeaderCartButton = (props) => {
   const [cartItems,setCartItems] = useState([])
 
   const numberOfCartItems = cartItems.reduce((curNumber, item) => {
-    return curNumber + item.qty;
+    return curNumber + item.quantity;
   }, 0);
 
 let cartItem = props.cartItem;
 
   const btnClasses = `button ${btnIsHighlighted ? 'bump' : ''}`;
 
+  let getTokenDetails = () => {
+    // read the data from localStorage
+    let token = localStorage.getItem("auth-token");
+    if (token === null) {
+      return false;
+    } else {
+      return JSON.parse(token);
+      // return true;
+    }
+  };
+  let [userDetails, setUserDetails] = useState(getTokenDetails());
+
+  let getCartItems = async () => {
+    let user = {email:userDetails.email}
+    try {
+      let { data } = await axios.post(
+        "https://fantasy-jewellery-app.herokuapp.com/cart/items",user
+      );
+      if (data.status === true) {
+        setCartItems([...data.items]);
+      }
+      else setCartItems([]);
+    } catch (error) {
+      console.log(error);
+      alert("Server error");
+    }
+  };
+
   useEffect(() => {
-    if (cartItem.qty === undefined) {
+    getTokenDetails();
+    getCartItems();
+    if (cartItem.quantity === undefined) {
       return;
     }
     setBtnIsHighlighted(true);
     let obj = cartItems.find((item, index) => {
       if (item.id === cartItem.id) {
-        cartItems[index].qty=cartItem.qty
+        cartItems[index].quantity=cartItem.quantity
           return true; // stop searching
       }});
   if(obj==undefined) setCartItems([...cartItems,cartItem])

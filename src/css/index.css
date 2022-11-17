@@ -386,7 +386,7 @@ background-color: white;
   background-color: white;
   border-radius: 15px;
   display: flex;
-  width:60%;
+  width:75%;
   height:80%;
   box-shadow: 0px 1px 7px 0px #0436179d;
 }
@@ -543,10 +543,11 @@ background-color: white;
     color:#0f0e0e;
     width: 55%;
     height:100%;
-    font-weight: 500;
-    font-size: 1.75em;
+    font-weight: 400;
+    font-size: 1.25em;
     font-style: italic;
     border-left:1px solid grey;
+    padding-top:20px;
     /* text-shadow: 0px 1px 20px #dffbeaeb; */
   }
 
@@ -558,8 +559,8 @@ background-color: white;
   }
 
   .cartItem .item-desc p:nth-child(2){
-    font-weight: 400;
-    font-size: 0.75em; 
+    font-weight: bold;
+    font-size: 1em; 
     /* text-shadow: 0px 1px 20px #dffbeaeb; */
   }
 
@@ -569,9 +570,10 @@ background-color: white;
     width: 20%;
     height:100%;
     border-left:1px solid grey;
-    font-weight: 500;
-    font-size: 1.75em;
+    font-weight: 400;
+    font-size: 1.5em;
     font-style: italic;
+    padding-top:20px;
     /* text-shadow: 0px 1px 20px #dffbeaeb; */
   }
 

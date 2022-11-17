@@ -13,7 +13,7 @@ const ProductSection = (props) => {
                 key={index}
                 className="Card hand width40"
                 onClick={() => {
-                  navigate("/item/" + item._id);
+                  navigate("/item/" + item.id);
                 }}
               >
                 <img

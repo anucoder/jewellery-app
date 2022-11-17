@@ -1,43 +1,87 @@
 import Header from "./Header";
 import Container from "./Container";
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
+
+  let navigate = useNavigate();
+
+  let getTokenDetails = () => {
+    // read the data from localStorage
+    let token = localStorage.getItem("auth-token");
+    if (token === null) {
+      return false;
+    } else {
+      // console.log(token)
+      return JSON.parse(token);
+      // return true;
+    }
+  };
+  let [userDetails, setUserDetails] = useState(getTokenDetails());
+
+  let [cartItems, setCartItems] = useState([]);
+
+  let totalPrice = cartItems.reduce((curNumber, item) => {
+    return curNumber + (item.productPrice*item.quantity);
+  }, 0);
+
+  let getCartItems = async () => {
+    let user = {email:userDetails.email}
+    // console.log(JSON.parse(userDetails))
+    try {
+      let { data } = await axios.post(
+        "https://fantasy-jewellery-app.herokuapp.com/cart/items",user
+      );
+      //console.log(data)
+      if (data.status === true) {
+        setCartItems([...data.items]);
+    
+      //console.log(data)
+      }
+      else setCartItems([]);
+    } catch (error) {
+      console.log(error);
+      alert("Server error");
+    }
+    // console.log(categoryDetails);
+  };
+
+  useEffect(() => {
+    getTokenDetails();
+    getCartItems();
+  }, []);
+
   return (
     <>
       <Header cartItem={{}} />
       <Container>
-        <div className="cart">
-          <div className="cartItem">
+        {cartItems.length >0 ? (<div className="cart">
+          {cartItems.map((item,index)=>{
+          return(<div key={index} className="cartItem">
             <div className="image">
-              <img src="/assets/necklace1.jpg" alt="cartItem" />
+              <img src={item.productImage} onClick={() => {
+                  navigate("/item/" + item.productId);
+                }} alt="cartItem" className="hand"/>
             </div>
             <div className="item-desc">
-              <p>White Lady Eaaring</p>
-              <p>Price : 20000</p>
-              <div className="button-group">
-                {/* {cartItem.qty > 0 ? ( */}
-
-                {/* <button className="hand inc-btn" onClick={() => removeCartItemsTotal()}> */}
+              <p>{item.productName}</p>
+              <p>Price : {item.productPrice}</p>
+              <p> Quantity : {item.quantity }</p>
+              {/* <div className="button-group">
                 <button className="hand inc-btn">-</button>
-                <button className="counter-btn">1</button>
-                {/* <button className="hand inc-btn" onClick={() => addCartItemsTotal()}> */}
+                <button className="counter-btn">{item.quantity}</button>
                 <button className="hand inc-btn">+</button>
-              </div>
-              {/* ) : ( 
-                <button className="hand add-cart-btn" onClick={() => addCartItemsTotal()}>
-                  <span id="cart-icon">
-                    <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </span>
-                  Add to Cart
-                </button>
-               )} */}
+              </div> */}
             </div>
             <div className="item-price">
               <p>Total Price</p>
-              <h2>20000</h2>
+              <p>{item.productPrice * item.quantity}</p>
             </div>
-          </div>
-        </div>
+          </div>)}) }
+        </div>): (<h1>Cart is Empty</h1>)}
+        
         <div className="totalPrice">
           <form
             className="myForm"
@@ -72,7 +116,7 @@ const Cart = () => {
                 <textarea name="comments" maxLength="500"></textarea>
               </label>
             </p>
-            <p>Total Price : 20000</p>
+            <p>Total Price : {totalPrice}</p>
           <button className="order">Order now</button>
           </form>
         </div>
