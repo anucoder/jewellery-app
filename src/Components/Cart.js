@@ -20,8 +20,8 @@ const Cart = () => {
     }
   };
   let [userDetails, setUserDetails] = useState(getTokenDetails());
-
   let [cartItems, setCartItems] = useState([]);
+  let [showForm,setShowForm] = useState(false);
 
   let totalPrice = cartItems.reduce((curNumber, item) => {
     return curNumber + (item.productPrice*item.quantity);
@@ -55,8 +55,9 @@ const Cart = () => {
 
   return (
     <>
-      <Header cartItem={{}} />
+      <Header cartChanged={-1} />
       <Container>
+        <div className="cart-inner-container">
         {cartItems.length >0 ? (<div className="cart">
           {cartItems.map((item,index)=>{
           return(<div key={index} className="cartItem">
@@ -81,8 +82,11 @@ const Cart = () => {
             </div>
           </div>)}) }
         </div>): (<h1>Cart is Empty</h1>)}
-        
-        <div className="totalPrice">
+        <div className="totalprice">
+          <p>Total Price : {totalPrice}</p>
+          <button className="button" onClick={()=>{setShowForm(true);}}>Place order</button>
+        </div>        
+        {showForm ? (<div className="order-form">
           <form
             className="myForm"
             method="get"
@@ -119,6 +123,7 @@ const Cart = () => {
             <p>Total Price : {totalPrice}</p>
           <button className="order">Order now</button>
           </form>
+        </div>):null}
         </div>
       </Container>
     </>

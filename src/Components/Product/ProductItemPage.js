@@ -27,13 +27,13 @@ function ProductItemPage() {
     if (token === null) {
       return false;
     } else {
-      return JSON.parse(token);;
+      return JSON.parse(token);
       // return true;
     }
   };
   let [userDetails, setUserDetails] = useState(getTokenDetails());
   let [cartItem, setCartItem] = useState({ email:"",id:0,quantity: 0 });
-  let [totalPrice, setTotalrice] = useState(0);
+  let [cartCounter,setCartCounter]= useState(0);
 
   let { id } = useParams();
 
@@ -54,7 +54,6 @@ function ProductItemPage() {
       let { data } = await axios.post(
         "https://fantasy-jewellery-app.herokuapp.com/cart/update-qty",_cartItem
       );
-      // console.log(data)
     } catch (error) {
       console.log(error);
       alert("Server error");
@@ -81,11 +80,13 @@ function ProductItemPage() {
      _cartItem = {
         email:userDetails.email,date:textDate,id:product.id,title:product.title,price:product.price,image:product.image, quantity: 1 }
         addCartItems(_cartItem);
+        setCartCounter(_cartItem.quantity);
       }
     else {
       _cartItem = { ...cartItem };
       _cartItem.quantity += 1;
       updateCartItems({email:userDetails.email,id:product.id,quantity:_cartItem.quantity})
+      setCartCounter(_cartItem.quantity);
     }
     setCartItem({..._cartItem})
     //console.log(_cartItem)
@@ -95,6 +96,7 @@ function ProductItemPage() {
   let removeCartItemsTotal = () => {
     let _cartItem = { ...cartItem };
     _cartItem.quantity -= 1;
+    setCartCounter(_cartItem.quantity);
     let filter = {email:userDetails.email,id:product.id}
     if(_cartItem.quantity==0){
       setCartItem({ ..._cartItem });
@@ -134,6 +136,7 @@ function ProductItemPage() {
       let _cartItem1 = {
       email:userDetails.email,id:product.id,quantity: data.quantity.quantity }
       setCartItem({..._cartItem1});
+      setCartCounter(_cartItem1.quantity)
       // console.log(data.quantity)
       }
       //console.log(data)
@@ -170,9 +173,14 @@ function ProductItemPage() {
     getProductDetails();
   }, []);
 
+  // useEffect(() => {
+  //   // getTokenDetails();
+  //   // getProductDetails();
+  // }, [isCartChanged]);
+
   return (
     <>
-      <Header cartItem={cartItem} />
+      <Header cartChanged={cartCounter} />
       <Container>
         {/* {console.loag(product)} */}
         <div className="container-large">

@@ -11,7 +11,7 @@ const HeaderCartButton = (props) => {
     return curNumber + item.quantity;
   }, 0);
 
-let cartItem = props.cartItem;
+// let cartItem = props.cartItem;
 
   const btnClasses = `button ${btnIsHighlighted ? 'bump' : ''}`;
 
@@ -33,6 +33,7 @@ let cartItem = props.cartItem;
       let { data } = await axios.post(
         "https://fantasy-jewellery-app.herokuapp.com/cart/items",user
       );
+      console.log(data.items)
       if (data.status === true) {
         setCartItems([...data.items]);
       }
@@ -44,27 +45,23 @@ let cartItem = props.cartItem;
   };
 
   useEffect(() => {
-    getTokenDetails();
-    getCartItems();
-    if (cartItem.quantity === undefined) {
-      return;
-    }
+    if(props.cartChanged >=0){console.log(props.cartChanged)
     setBtnIsHighlighted(true);
-    let obj = cartItems.find((item, index) => {
-      if (item.id === cartItem.id) {
-        cartItems[index].quantity=cartItem.quantity
-          return true; // stop searching
-      }});
-  if(obj==undefined) setCartItems([...cartItems,cartItem])
-
     const timer = setTimeout(() => {
+      getCartItems();
+      // console.log("cartcartItems "+cartItems)
       setBtnIsHighlighted(false);
-    }, 300);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
-    };
-  }, [cartItem]);
+    };}
+  }, [props.cartChanged]);
+
+  useEffect(()=>{
+    getCartItems();
+    getTokenDetails();
+  },[])
 
   return (
     <button onClick={props.onClick} className={btnClasses}>
@@ -74,8 +71,6 @@ let cartItem = props.cartItem;
       <span>Your Cart</span>
       <span className="badge">{numberOfCartItems}</span>
     </button>
-    
-
   );
 };
 

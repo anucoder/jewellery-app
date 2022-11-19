@@ -7,7 +7,7 @@ import Footer from "./Footer";
 const HomePage = () => {
   return (
     <>
-      <Header cartItem={{}}/>
+      <Header cartChanged={-1}/>
       <div className="background"></div>
       <Container className="relative">
         <div className="absolute bg-quote">

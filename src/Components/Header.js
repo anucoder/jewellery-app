@@ -97,7 +97,7 @@ const Header = (props) => {
                 onClick={() => {
                   navigate("/cart");
                 }}
-                cartItem={props.cartItem}
+                cartChanged={props.cartChanged}
               />
               <button className="logout" onClick={logout}>
                 Logout
