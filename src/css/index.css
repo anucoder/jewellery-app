@@ -20,6 +20,9 @@ code {
     monospace;
 }
 
+.logo{
+  font-family: 'Dosis', sans-serif;
+}
 .absolute{
   position: absolute;
 }
@@ -306,6 +309,9 @@ footer a{
   padding: 5% 0;
 }
 
+.filter-button{
+  display: none;
+}
 .product-section{
   width:70%;
   height:90vh;
@@ -645,3 +651,148 @@ background: #ccc;
 cursor: pointer;
 }
 
+@media only screen and (min-width: 375px) and (max-width: 575px) {
+
+  .background{
+    background-position: unset;
+    background-attachment: scroll;
+    height: 35vh;
+  }
+  .Card{
+      width:85%;
+  }
+
+  .bg-quote{
+    /* position: absolute; */
+    top:5%;
+    left:5%;
+  }
+
+  .quote-text{
+    font-size: 1.255em;
+  }
+  .quote-author{
+    font-size: 1em;
+  }
+
+  /* product preview */
+  .container-large{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     
+     width:100%;
+     height: 97vh;
+ }
+ .card-large{
+     display: block;
+     width:100%;
+     /* height:620px; */
+ }
+
+ .card-large img{
+     border-radius: 15px 15px 0 0;
+     width:75%;
+     height:35%;
+ }
+ 
+ .description-sec{      
+     width:100%;  
+     height:60%;    
+ }
+
+ .product-name{
+     padding:15px 0;
+  }
+ 
+  .price{
+     margin-bottom: 0px;
+ }
+
+ /* filterpage */
+.inner-container{
+  /* flex-direction: column; */
+  position: relative;
+}
+
+.filter-options{
+  display: none;
+}
+
+.filter-section .filter-button{
+  display: inline-block;
+  background-color: white;
+  padding: 20px;
+  cursor: pointer;
+  box-shadow: 0px 1px 7px 0px #0436179d;
+}
+
+
+.filter-section:hover .filter-options{
+  display: block;
+  transform: translateX(0);
+  width:100%;
+  position: absolute;
+  top:5%;
+  left:5%;
+  height: 95vh;
+  background-color: white;
+  /* border:1px solid red; */
+  box-shadow: 0px 1px 7px 0px #0436179d;
+  padding:30px;
+}
+
+.filter-section:hover .filter-button{
+  display: none;
+}
+
+.filter-section{
+  /* display: none; */
+  /* width:5%; */
+  /* position: absolute;*/
+ height:50px;
+ background-color: transparent;
+ box-shadow: none;
+/* top:10%;
+right:5%;  */
+  
+}
+
+.product-section{
+  width: 90%;
+  position: absolute;
+  top:100px;
+}
+
+.button,.logout{
+  padding:10px;
+}
+
+.cartItem{
+  flex-direction: column;
+  height:50vh;
+}
+
+.cartItem .image{
+  height:50%;
+  width:100%;
+}
+.cartItem hr{
+  display: none;
+}
+
+.cartItem .item-desc{
+  /* height:50%; */
+  width:100%;
+}
+
+.cartItem .item-price{
+  /* height:50%; */
+  width:100%;
+}
+
+.cartItem p{
+  font-size: 1em;
+}
+
+}

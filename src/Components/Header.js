@@ -84,7 +84,7 @@ const Header = (props) => {
       <GoogleOAuthProvider clientId="73799834581-guoauolq9irgmqraqvep8gchc322nsos.apps.googleusercontent.com">
         <header className="header">
           <h1
-            className="hand"
+            className="hand logo"
             onClick={() => {
               navigate("/");
             }}
