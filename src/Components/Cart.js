@@ -3,6 +3,7 @@ import Container from "./Container";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 const Cart = () => {
 
@@ -48,6 +49,104 @@ const Cart = () => {
     // console.log(categoryDetails);
   };
 
+    // Payment
+
+    async function loadScript() {
+      let status = false;
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      window.document.body.appendChild(script);
+        
+           script.onload = () => {
+            //console.log("returning true")
+              status = true;
+            };
+            script.onerror = () => {
+              //console.log("returning false")
+              status = false;
+            };
+        
+      }
+  
+    let displayRazorpay = async (event) => {
+      event.preventDefault();
+      let isLoaded = await loadScript();
+      //console.log(isLoaded)
+      if (isLoaded === false) {
+        alert("sdk not loaded");
+        return false;
+      }
+      var serverData = {
+        // amount : totalPrice
+        amount:10
+      }
+      var {data} = await axios.post(
+        "https://fantasy-jewellery-app.herokuapp.com/api/payment/gen-order",serverData
+      );
+        var order = data.order;
+  
+      var options = {
+        key: "rzp_test_rrlnhLgPkYoMK8", // Enter the Key ID generated from the Dashboard
+        amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: order.currency,
+        name: "Fantasy",
+        description: "Paying for selected items",
+        image:
+          "https://branditechture.agency/brand-logos/wp-content/uploads/wpdm-cache/Screenshot_20220621-202824-900x0.png",
+        order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        handler: async function (response) {
+          var sendData = {
+            razorpay_payment_id: response.razorpay_payment_id,
+            razorpay_order_id: response.razorpay_order_id,
+            razorpay_signature: response.razorpay_signature,
+          };
+          var { data } = await axios.post(
+            "https://fantasy-jewellery-app.herokuapp.com/api/payment/verify",
+            sendData
+          );
+          if(data.status===true){
+            Swal.fire({
+              icon: "success",
+              title: "Payment done successfully",
+              text: "",
+            }).then(() => {
+              window.location.replace("/");
+            });
+            
+          } 
+          else {
+            Swal.fire({
+              icon: "error",
+              title: "Payment failed !! Try again.",
+              text: "",
+            })
+          }
+        },
+        prefill: {
+          name: userDetails.name,
+          email: userDetails.email,
+          contact: "9999999999",
+        },
+        notes: {
+          address: "Razorpay Corporate Office",
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+      // function loadingScript() {
+      //   var razorpayObject = window.Razorpay(options);
+      //   razorpayObject.open();
+      // }
+      
+      // new Promise(resolve=>{setTimeout(()=>resolve(loadingScript()), 1000);});
+      
+  
+      var razorpayObject = window.Razorpay(options);
+      razorpayObject.open();
+  
+    };
+  
   useEffect(() => {
     getTokenDetails();
     getCartItems();
@@ -121,7 +220,7 @@ const Cart = () => {
               </label>
             </p>
             <p>Total Price : {totalPrice}</p>
-          <button className="order">Order now</button>
+          <button className="order" onClick={(event)=>{displayRazorpay(event)}}>Order now</button>
           </form>
         </div>):null}
         </div>

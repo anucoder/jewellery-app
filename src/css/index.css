@@ -651,7 +651,7 @@ background: #ccc;
 cursor: pointer;
 }
 
-@media only screen and (min-width: 375px) and (max-width: 575px) {
+@media only screen and (min-width: 355px) and (max-width: 575px) {
 
   .background{
     background-position: unset;

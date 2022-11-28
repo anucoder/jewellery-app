@@ -173,11 +173,6 @@ function ProductItemPage() {
     getProductDetails();
   }, []);
 
-  // useEffect(() => {
-  //   // getTokenDetails();
-  //   // getProductDetails();
-  // }, [isCartChanged]);
-
   return (
     <>
       <Header cartChanged={cartCounter} />
