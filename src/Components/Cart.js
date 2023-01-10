@@ -32,7 +32,7 @@ const Cart = () => {
     // console.log(JSON.parse(userDetails))
     try {
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/items",
+        "https://jewellry-app-be.up.railway.app/cart/items",
         user
       );
       //console.log(data)
@@ -54,7 +54,7 @@ const Cart = () => {
     console.log(user);
     try {
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/empty-cart",
+        "https://jewellry-app-be.up.railway.app/cart/empty-cart",
         user
       );
       console.log(data);
@@ -94,7 +94,7 @@ const Cart = () => {
       amount: 10,
     };
     var { data } = await axios.post(
-      "https://fantasy-jewellery-app.herokuapp.com/api/payment/gen-order",
+      "https://jewellry-app-be.up.railway.app/api/payment/gen-order",
       serverData
     );
     var order = data.order;
@@ -115,7 +115,7 @@ const Cart = () => {
           razorpay_signature: response.razorpay_signature,
         };
         var { data } = await axios.post(
-          "https://fantasy-jewellery-app.herokuapp.com/api/payment/verify",
+          "https://jewellry-app-be.up.railway.app/api/payment/verify",
           sendData
         );
         if (data.status === true) {

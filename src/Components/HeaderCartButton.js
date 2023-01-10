@@ -31,7 +31,7 @@ const HeaderCartButton = (props) => {
     let user = {email:userDetails.email}
     try {
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/items",user
+        "https://jewellry-app-be.up.railway.app/cart/items",user
       );
       console.log(data.items)
       if (data.status === true) {

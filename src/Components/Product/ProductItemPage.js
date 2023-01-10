@@ -40,7 +40,7 @@ function ProductItemPage() {
   let addCartItems = async (_cartItem) => {
     try {
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/new-item",_cartItem
+        "https://jewellry-app-be.up.railway.app/cart/new-item",_cartItem
       );
       // console.log(data)
     } catch (error) {
@@ -52,7 +52,7 @@ function ProductItemPage() {
   let updateCartItems = async (_cartItem) => {
     try {
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/update-qty",_cartItem
+        "https://jewellry-app-be.up.railway.app/cart/update-qty",_cartItem
       );
     } catch (error) {
       console.log(error);
@@ -63,7 +63,7 @@ function ProductItemPage() {
   let deleteCartItem = async (_cartItem) => {
     try {
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/delete-item",_cartItem
+        "https://jewellry-app-be.up.railway.app/cart/delete-item",_cartItem
       );
       // console.log(data)
     } catch (error) {
@@ -110,7 +110,7 @@ function ProductItemPage() {
   let getProductDetails = async () => {
     try {
       let { data } = await axios.get(
-        "https://fantasy-jewellery-app.herokuapp.com/product-details/" + id
+        "https://jewellry-app-be.up.railway.app/product-details/" + id
       );
       if (data.status === true) {
         setProductDetails({ ...data.productDetails });
@@ -130,7 +130,7 @@ function ProductItemPage() {
       let filter = {email:userDetails.email,id:id}
       //console.log(filter)
       let { data } = await axios.post(
-        "https://fantasy-jewellery-app.herokuapp.com/cart/get-qty",filter
+        "https://jewellry-app-be.up.railway.app/cart/get-qty",filter
       );
       if (data.status === true) {
       let _cartItem1 = {

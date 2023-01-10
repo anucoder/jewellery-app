@@ -36,7 +36,7 @@ const ProductPage = () => {
 
   let filterOperation = async (filter) => {
     console.log(filter);
-    let URL = "https://fantasy-jewellery-app.herokuapp.com/products/filter";
+    let URL = "https://jewellry-app-be.up.railway.app/products/filter";
     try {
       let { data } = await axios.post(URL, filter);
       if (data.status === true) {
@@ -106,7 +106,7 @@ const ProductPage = () => {
   let getProductList = async () => {
     try {
       let { data } = await axios.get(
-        "https://fantasy-jewellery-app.herokuapp.com/products/" + cat_id
+        "https://jewellry-app-be.up.railway.app/products/" + cat_id
       );
       if (data.status === true) {
         setProductList([...data.productlist]);
